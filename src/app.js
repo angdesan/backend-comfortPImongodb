@@ -10,7 +10,12 @@ const app = express();
 const path = require('path');
 const port = process.env.PORT || config.server.port;
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server,{
+    cors: {
+        origin: ['http://localhost:5173'],
+        methods: ['GET','POST'] 
+    }
+});
 const { Socket } = require('dgram');
 const recomendation = require('./sockets/recomendationSocket')
 
