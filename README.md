@@ -29,5 +29,26 @@ npm start
 Ruta API para la realización de la votación:
 
 ```
-http://[localhost | dominio]:[puerto]/api/v1/votacionComfortRL/votacionComfort
+/api/v1/votacionComfortRL/votacionComfort
+```
+
+Modelo de envio para votación:
+
+```
+{
+  "nivel": "[cold | warm | neutral]"
+}
+```
+
+Ruta API para actualizar el estado del AC (temperatura del aire acondicionado):
+
+```
+7api/v1/realTimeACRL/realTimeAC
+```
+Modelo de envio para el estado del aire:
+
+```
+{
+    "statusAC": [int]   
+}
 ```
