@@ -26,6 +26,8 @@ npm start
 ```
 ### Rutas API y modelos json a enviar:
 
-Ruta API para la realización de la votación
-http://[localhost | dominio]:[puerto]/api/v1/votacionComfortRL/votacionComfort
+Ruta API para la realización de la votación:
 
+```
+http://[localhost | dominio]:[puerto]/api/v1/votacionComfortRL/votacionComfort
+```
