@@ -43,7 +43,7 @@ Modelo de envio para votación:
 Ruta API para actualizar el estado del AC (temperatura del aire acondicionado):
 
 ```
-7api/v1/realTimeACRL/realTimeAC
+/api/v1/realTimeACRL/realTimeAC
 ```
 Modelo de envio para el estado del aire:
 
