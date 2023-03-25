@@ -3,23 +3,28 @@ const {ObjectId} = require('mongodb');
 const updateRealTime = async(req,res)=>{
     try{
         const data_from_page = req.body;
-        console.log(data_from_page);
-        let updateRealTimeAC = await realTimeAC.updateOne({
-            _id: new ObjectId('640537ce8f73273635557fbd') 
-        },{
-            $set: {
-                statusAC: data_from_page.statusAC,
-                fecha: new Date()
+        let statusAC = data_from_page.statusAC;
+        if(statusAC){
+            if(typeof statusAC !== undefined && statusAC !== null){
+                let updateRealTimeAC = await realTimeAC.updateOne({
+                    _id: new ObjectId('640537ce8f73273635557fbd') 
+                },{
+                    $set: {
+                        statusAC: data_from_page.statusAC,
+                        fecha: new Date()
+                    }
+                });
+                req.io.emit('recomendation:read',JSON.stringify(data_from_page))
+                res.status(201).json(updateRealTimeAC);
+            }else{
+                return res.status(400).send("No debe enviar parametros vacios")    
             }
-        });
-        req.io.emit('recomendation:read',JSON.stringify(data_from_page))
-        res.status(201).json(updateRealTimeAC);
+        }else{
+            return res.status(400).send("No envio los parametros permitidos")
+        }
     }catch(err){
-        console.log(err);
-        res.status(500).json({
-            ok:false,
-            msg: 'Please inform your administrator'
-        })
+        console.log("Error al cargar la actualizacion del estado del AC: ",err);
+        return res.status(500).send("Error al realizar la actualizacion del estado del AC")
     }
 }
 module.exports = {

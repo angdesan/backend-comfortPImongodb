@@ -5,20 +5,16 @@ const valueIterationModel = require('../../models/valueIterationModel');
 
 
 const createValueIteration = async (req,res)=>{
-    const data = req.body;
-    let lecturaValueIteration = data
     try{
+        const data = req.body;
+        let lecturaValueIteration = data
         let insertValueIteration = await valueIterationModel.insertOne(lecturaValueIteration);
         res.status(201).json(insertValueIteration);
 
 
     }catch(err){
-        console.log(err);
-        res.status(500).json({
-            ok:false,
-            msg: 'Please inform your administrator'
-        })
-
+        console.log("Error al cargar la insercion: ",err);
+        return res.status(500).send("Error al realizar la insercion de la data de value iteration")
     }
 }
 module.exports ={

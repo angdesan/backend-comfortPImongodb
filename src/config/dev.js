@@ -3,7 +3,7 @@ const config = {
         name: 'comfortDBPI' 
     },
     server: {
-        port:3000
+        port:10000
     }
 }
 module.exports = config;
