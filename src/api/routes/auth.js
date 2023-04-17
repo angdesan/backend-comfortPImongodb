@@ -5,3 +5,5 @@ const Register = require('./../../controllers/auth/registerController');
 app.post('/register', async(req,res)=>{
     await Register.register(req,res)
 });
+
+module.exports = app;

@@ -14,9 +14,14 @@ const updateOne = async (id,set)=>{
     }
 }
 const findOne = async (query,options)=>{
-    const db = mongo.getDb();
-    let statusAC = await db.collection('comfort_votacion').findOne(query,options);
-    return statusAC;
+    try{
+        const db = mongo.getDb();
+        let statusAC = await db.collection('comfort_votacion').findOne(query,options);
+        return statusAC;
+    }catch(err){
+        console.log("Error al encontrar la votacion");
+        return undefined
+    }
 }
 module.exports ={
     updateOne,

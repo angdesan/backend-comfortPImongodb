@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
-const RegisterModel = require('./../../models/registerModel')
+const UserModel = require('../../models/userModel')
 const register = async (req, res) =>{
     try{
         const data_from_page = req.body;
         let {username, email,password} = data_from_page;
-        let insertUser = await RegisterModel.insertOne({
+        let insertUser = await UserModel.insertOne({
             username: username,
             email: email,
             password: bcrypt.hashSync(password,10),
