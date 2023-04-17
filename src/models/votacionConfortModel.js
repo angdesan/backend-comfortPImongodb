@@ -13,6 +13,12 @@ const updateOne = async (id,set)=>{
 
     }
 }
+const findOne = async (query,options)=>{
+    const db = mongo.getDb();
+    let statusAC = await db.collection('comfort_votacion').findOne(query,options);
+    return statusAC;
+}
 module.exports ={
-    updateOne
+    updateOne,
+    findOne
 }

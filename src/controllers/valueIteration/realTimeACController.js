@@ -1,13 +1,15 @@
-const realTimeAC = require('../../models/realTimeACModel');
+const realTimeACModel = require('../../models/realTimeACModel');
 const {ObjectId} = require('mongodb');
 const updateRealTime = async(req,res)=>{
     try{
         const data_from_page = req.body;
         let statusAC = data_from_page.statusAC;
+        let realTimeCollection = await realTimeACModel.findOne({},{});
+        let idRealTime = realTimeCollection._id;
         if(statusAC){
             if(typeof statusAC !== undefined && statusAC !== null){
-                let updateRealTimeAC = await realTimeAC.updateOne({
-                    _id: new ObjectId('640537ce8f73273635557fbd') 
+                let updateRealTimeAC = await realTimeACModel.updateOne({
+                    _id: new ObjectId(idRealTime) 
                 },{
                     $set: {
                         statusAC: data_from_page.statusAC,
@@ -30,7 +32,7 @@ const updateRealTime = async(req,res)=>{
 const firstStatus = async (req,res)=>{
     try{
         let options = {_id:0,statusAC:1};
-        let statusAC = await realTimeAC.findOne({},options);
+        let statusAC = await realTimeACModel.findOne({},options);
         let status = statusAC.statusAC;
         let response = {
             statusAC : status

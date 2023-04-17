@@ -6,6 +6,8 @@ const updateVotacion = async (req, res) => {
 
     try {
         const data_from_page = req.body;
+        let collectionVotacion = await votacionConfortModel.findOne({},{});
+        let idVotacionComfort = collectionVotacion._id;
         if(data_from_page.nivel){
             let nivelComfort = data_from_page.nivel;
             let updateComfort 
@@ -20,7 +22,7 @@ const updateVotacion = async (req, res) => {
                 return res.status(400).send("Los parametros permitidos son cold, warm y neutral")
             }
             updateComfort = await votacionConfortModel.updateOne({
-                _id: new ObjectId('64001466e3be1cab6c3e8681')
+                _id: new ObjectId(idVotacionComfort)
             }, {
                 $inc: envio
             })
