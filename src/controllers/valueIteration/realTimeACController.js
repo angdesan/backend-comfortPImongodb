@@ -13,7 +13,7 @@ const updateRealTime = async(req,res)=>{
                 },{
                     $set: {
                         statusAC: data_from_page.statusAC,
-                        fecha: new Date()
+                        createdAt: new Date()
                     }
                 });
                 req.io.emit('recomendation:read',JSON.stringify(data_from_page))
