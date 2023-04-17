@@ -10,6 +10,12 @@ const updateOne = async(id,set) =>{
         return undefined;
     }
 }
+const findOne = async (query,options)=>{
+    const db = mongo.getDb();
+    let statusAC = await db.collection('comfort_realtime').findOne(query,options);
+    return statusAC;
+}
 module.exports = {
-    updateOne
+    updateOne,
+    findOne
 }

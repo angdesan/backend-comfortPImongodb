@@ -27,6 +27,20 @@ const updateRealTime = async(req,res)=>{
         return res.status(500).send("Error al realizar la actualizacion del estado del AC")
     }
 }
+const firstStatus = async (req,res)=>{
+    try{
+        let options = {_id:0,statusAC:1};
+        let statusAC = await realTimeAC.findOne({},options);
+        let status = statusAC.statusAC;
+        let response = {
+            statusAC : status
+        }
+        return res.status(201).json(response);
+    }catch(err){
+        return res.status(500).send('Error al obtener el estado actual del AC');
+    }
+}
 module.exports = {
-    updateRealTime
+    updateRealTime,
+    firstStatus
 }
