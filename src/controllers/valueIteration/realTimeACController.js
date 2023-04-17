@@ -1,4 +1,4 @@
-const realTimeAC = require('./../../models/realTimeACModel');
+const realTimeAC = require('../../models/realTimeACModel');
 const {ObjectId} = require('mongodb');
 const updateRealTime = async(req,res)=>{
     try{
