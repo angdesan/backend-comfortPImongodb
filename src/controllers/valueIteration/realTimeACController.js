@@ -3,27 +3,27 @@ const {ObjectId} = require('mongodb');
 const updateRealTime = async(req,res)=>{
     try{
         const data_from_page = req.body;
+        if(typeof data_from_page.statusAC === "undefined" || data_from_page.statusAC === null || data_from_page.statusAC === ''){
+            return res.status(404).send("No envio los parametros permitidos");
+        }
         let statusAC = data_from_page.statusAC;
         let realTimeCollection = await realTimeACModel.findOne({},{});
         let idRealTime = realTimeCollection._id;
-        if(statusAC){
-            if(typeof statusAC !== undefined && statusAC !== null){
-                let updateRealTimeAC = await realTimeACModel.updateOne({
-                    _id: new ObjectId(idRealTime) 
-                },{
-                    $set: {
-                        statusAC: data_from_page.statusAC,
-                        createdAt: new Date()
-                    }
-                });
-                req.io.emit('recomendation:read',JSON.stringify(data_from_page))
-                res.status(201).json(updateRealTimeAC);
-            }else{
-                return res.status(400).send("No debe enviar parametros vacios")    
-            }
-        }else{
-            return res.status(400).send("No envio los parametros permitidos")
+
+        if(typeof statusAC === "undefined" || statusAC === null || statusAC === ''){
+            return res.status(404).send("No debe enviar parametros vacios o nulos");
         }
+        let updateRealTimeAC = await realTimeACModel.updateOne({
+            _id: new ObjectId(idRealTime) 
+        },{
+            $set: {
+                statusAC: data_from_page.statusAC,
+                createdAt: new Date()
+            }
+        });
+        req.io.emit('recomendation:read',JSON.stringify(data_from_page))
+        res.status(201).json(updateRealTimeAC);
+
     }catch(err){
         console.log("Error al cargar la actualizacion del estado del AC: ",err);
         return res.status(500).send("Error al realizar la actualizacion del estado del AC")
